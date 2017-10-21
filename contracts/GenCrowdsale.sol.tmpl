@@ -8,6 +8,8 @@ contract GenCrowdsale is Destructible, BaseToken {
     string public name = "${name}";                                     // "GenToken";
     string public symbol = "${symbol}";                                 // "GEN"
     uint8 public decimals = ${decimals};                                // 3
+    string public company = "${company}";
+    uint256 initialAmount = ${initialAmount};
     
     uint public basePriceOfToken = ${basePriceOfToken} ether;           // 0.001
     uint public salePeriod = ${salePeriod} minutes;                     // 1
@@ -59,6 +61,7 @@ contract GenCrowdsale is Destructible, BaseToken {
     transitionNext 
     {
         startTime = now;
+        totalSupply = initialAmount;
     }
 
     function () public payable 
@@ -74,12 +77,21 @@ contract GenCrowdsale is Destructible, BaseToken {
         totalAmountRaised += amount;
         ethBalanceOf[msg.sender] += amount;
         
-        totalSupply += tokenAmount;
+        // totalSupply += tokenAmount;
         balances[to] += tokenAmount;
         
         FundTransfer(msg.sender, amount, true);
         Mint(to, tokenAmount);
         Transfer(0x0, to, tokenAmount);
+    }
+
+
+    function demonstrateTransferFrom(address _from, address _to, uint256 _value) returns (bool success) {
+        require(balances[_from] >= _value && balances[_to] + _value > balances[_to]);
+        balances[_to] += _value;
+        balances[_from] -= _value;
+        Transfer(_from, _to, _value);
+        return true;
     }
 
     function calculateBonusAt (uint256 _at, uint256 _amount) internal constant returns (uint256) {

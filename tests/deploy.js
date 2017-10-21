@@ -17,15 +17,21 @@ app.get('/testpublish', function(req, res) {
     method: 'POST',
     json: {
       "userId": Math.round(Math.random() * (9999999 - 1000000) + 1000000),
-      "name": "TeraToken",
-      "decimals": 3,
-      "symbol": "TRTX",
-      "basePriceOfToken": 0.001,
-      "salePeriod": 14,
-      "fundingGoal": 52,
-      "minimalInvestment": 0.1,
-      "bonusUpperLimitDays": 2,
-      "bonusRate": 150
+      "platform": "mobile",
+      "type": "ICO",
+      "params": {
+        "name": "TeraToken",
+        "company": "Home",
+        "initialAmount": 10000000,
+        "decimals": 3,
+        "symbol": "TRTX",
+        "basePriceOfToken": 0.001,
+        "salePeriod": 14,
+        "fundingGoal": 52,
+        "minimalInvestment": 0.1,
+        "bonusUpperLimitDays": 2,
+        "bonusRate": 150
+      }
     }
   }
 

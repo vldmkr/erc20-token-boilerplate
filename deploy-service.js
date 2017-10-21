@@ -26,12 +26,13 @@ app.post('/api/v1/eth/publish', function (req, res) {
   }
 })
 
-function doWork (params) {
+function doWork (packet) {
   const options = {
     uri: 'http://localhost:9080/api/sc/publishresult',
     method: 'POST',
     json: {
-      "userId": params.userId,
+      "userId": packet.userId,
+      "platform": packet.platform,
       "ropstenPrivateKey": account.privateKey,
       "accountAddress": account.address,
       "tx": null,
@@ -58,7 +59,7 @@ function doWork (params) {
     doRequest(options, false)
   }
 
-  compiler.deploy(web3, account.address, "GenCrowdsale.sol:GenCrowdsale", params)
+  compiler.deploy(web3, account.address, "GenCrowdsale.sol:GenCrowdsale", packet.params)
   .then(emiter => {
     emiter.on('transactionHash', transactionHash => {
       options.json["tx"] = "https://ropsten.etherscan.io/tx/" + transactionHash
