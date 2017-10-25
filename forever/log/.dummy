@@ -1,2 +1,0 @@
-$ ./create-forever-config.sh
-$ forever start deploy-service-forever.json

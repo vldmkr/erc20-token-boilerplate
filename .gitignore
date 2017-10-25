@@ -1,6 +1,1 @@
-account.json
-deploy-service-forever.json
-
-forever/log/deploy-service*
-
 node_modules

@@ -9,10 +9,6 @@
   "author": "Vladyslav Makarian",
   "license": "MIT",
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.15.4",
-    "request": "^2.81.0",
-    "solc": "^0.4.16",
-    "web3": "^1.0.0-beta.18"
+    "express": "^4.15.4"
   }
 }
